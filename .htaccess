@@ -1,0 +1,20 @@
+# /gemini-store/.htaccess
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Set the base directory for all rewrite rules
+RewriteBase /gemini-store/
+
+# --- Rule for the custom module route (Specific)
+# This rule must come before the general .php rule to be processed first.
+# It rewrites a user-friendly URL to the actual PHP script.
+RewriteRule ^gemini/route/?$ gemini/route.php [NC,L]
+
+# --- Rule to hide .php extension (General)
+# Condition 1: The requested URL is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# Condition 2: A file with the same name but with a .php extension exists
+RewriteCond %{REQUEST_FILENAME}.php -f
+# Rule: If both conditions are met, rewrite the URL to the .php file
+RewriteRule ^(.*)$ $1.php [NC,L]

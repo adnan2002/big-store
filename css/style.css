@@ -1,0 +1,60 @@
+/* /gemini-store/css/style.css */
+
+/* Use the Inter font family defined in the header */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- Product Page Tab Styling --- */
+.tab-button {
+    @apply py-4 px-1 border-b-2 font-semibold text-lg text-gray-500 hover:text-gray-800 hover:border-gray-400 whitespace-nowrap;
+    border-color: transparent; /* Default state */
+    transition: all 0.3s ease-in-out;
+}
+
+.tab-button.active {
+    @apply border-indigo-600 text-indigo-600;
+}
+
+.tab-content {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Add some basic styling for prose content in tabs */
+.prose {
+    color: #374151;
+    line-height: 1.75;
+}
+.prose p {
+    margin-bottom: 1.25em;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Modal Animation Styling --- */
+#page-modal.flex, #quick-view-modal.flex {
+    display: flex; /* Override hidden */
+}
+
+#page-modal > div, #quick-view-modal > div#quick-view-content {
+    animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* --- Quick View Styling --- */
+#quick-view-body .product-image {
+    max-height: 500px; /* Limit image height in modal */
+}
