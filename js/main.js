@@ -1,28 +1,13 @@
-// /gemini-store/js/main.js
 
 document.addEventListener('DOMContentLoaded', function() {
-    /**
-     * Diagnostic Check: Verify if Tailwind CSS has loaded.
-     */
-    const bodyStyles = window.getComputedStyle(document.body);
+        const bodyStyles = window.getComputedStyle(document.body);
     if (bodyStyles.margin !== '0px') {
         const warning = document.getElementById('tailwind-warning');
         if (warning) warning.style.display = 'block';
     }
 
-    /*
-     * POPUP REMOVED: The following code block has been commented out
-     * to prevent the offer popup from appearing automatically.
-     *
-    if (CURRENT_PAGE !== 'category.php') {
-        setTimeout(showModal, 2500); // Delay popup slightly
-    }
-    */
-});
+    });
 
-/**
- * --- Generic Modal Functions ---
- */
 const pageModal = document.getElementById('page-modal');
 if (pageModal) {
     const modalContent = pageModal.querySelector('div');
@@ -49,9 +34,6 @@ if (pageModal) {
 }
 
 
-/**
- * --- Product Page Tabs ---
- */
 function switchTab(event, tabId) {
     const tabContainer = event.target.closest('.mt-16');
     const tabContents = tabContainer.querySelectorAll('.tab-content');
@@ -68,19 +50,12 @@ function switchTab(event, tabId) {
     event.currentTarget.classList.add('active');
 }
 
-/**
- * --- Quick View Feature (Completed) ---
- */
 const quickViewModal = document.getElementById('quick-view-modal');
 if (quickViewModal) {
     const quickViewContent = document.getElementById('quick-view-content');
     const quickViewBody = document.getElementById('quick-view-body');
 
-    /**
-     * Opens the quick view modal and populates it with product data.
-     * @param {number} productId - The ID of the product to display.
-     */
-    window.openQuickView = async function(productId) {
+        window.openQuickView = async function(productId) {
         quickViewBody.innerHTML = '<div class="p-16 text-center text-gray-500">Loading Product...</div>';
         quickViewModal.classList.add('flex');
         quickViewModal.classList.remove('hidden');
@@ -94,14 +69,12 @@ if (quickViewModal) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            // Extract specific product details from the fetched page
-            const name = doc.querySelector('h1').textContent.trim();
+                        const name = doc.querySelector('h1').textContent.trim();
             const price = doc.querySelector('.my-5 p:first-child').textContent.trim();
             const description = doc.querySelector('.leading-relaxed').textContent.trim();
             const imageUrl = doc.querySelector('.aspect-square img').src;
 
-            // Build a new, interactive layout for the modal
-            quickViewBody.innerHTML = `
+                        quickViewBody.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
                     <div>
                         <div class="aspect-square bg-gray-100 rounded-xl shadow-inner overflow-hidden">
@@ -134,12 +107,7 @@ if (quickViewModal) {
         }
     }
 
-    /**
-     * Simulates adding a product to the cart from the quick view modal.
-     * @param {number} productId - The product's ID.
-     * @param {string} productName - The product's name.
-     */
-    window.addToCartFromQuickView = function(productId, productName) {
+        window.addToCartFromQuickView = function(productId, productName) {
         const quantityInput = document.getElementById('qv-quantity');
         const quantity = parseInt(quantityInput.value, 10);
         const confirmationDiv = document.getElementById('qv-cart-confirmation');
@@ -165,16 +133,12 @@ if (quickViewModal) {
         }
     }
 
-    /**
-     * Closes the quick view modal.
-     */
-    window.closeQuickView = function() {
+        window.closeQuickView = function() {
         quickViewContent.classList.remove('scale-100', 'opacity-100');
         setTimeout(() => {
             quickViewModal.classList.remove('flex');
             quickViewModal.classList.add('hidden');
-            quickViewBody.innerHTML = ''; // Clear content
-        }, 300);
+            quickViewBody.innerHTML = '';         }, 300);
     }
 
     quickViewModal.addEventListener('click', function(event) {

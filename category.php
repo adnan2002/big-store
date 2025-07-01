@@ -1,8 +1,6 @@
-<?php // /gemini-store/category.php
-
+<?php 
 include 'includes/header.php';
 
-// --- Get Category ID and validate ---
 $categoryId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if ($categoryId <= 0) {
     echo "<p class='text-red-500'>Invalid category selected.</p>";
@@ -10,7 +8,6 @@ if ($categoryId <= 0) {
     exit;
 }
 
-// --- Fetch Category Info ---
 $stmt = $conn->prepare("SELECT name, description FROM categories WHERE id = ?");
 $stmt->bind_param("i", $categoryId);
 $stmt->execute();
@@ -23,7 +20,6 @@ if (!$category) {
     exit;
 }
 
-// --- Fetch Products in this Category ---
 $stmt = $conn->prepare("SELECT * FROM products WHERE category_id = ?");
 $stmt->bind_param("i", $categoryId);
 $stmt->execute();

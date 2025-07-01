@@ -1,8 +1,6 @@
-<?php // /gemini-store/index.php
-
+<?php 
 include 'includes/header.php';
 
-// Fetch all products for the homepage
 $result = $conn->query("SELECT * FROM products ORDER BY RAND() LIMIT 8");
 ?>
 
